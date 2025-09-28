@@ -1,9 +1,11 @@
-import { SignIn } from "@clerk/nextjs";
 
 export default function Page() {
   return (
     <div className="flex items-center justify-center mt-16">
-      <SignIn />
+      <div>
+        <h1>Sign In with NextAuth</h1>
+        <p>NextAuth implementation required.</p>
+      </div>
     </div>
   );
 }

@@ -17,9 +17,9 @@ const categories = [
     slug: "all",
   },
   {
-    name: "T-shirts",
+    name: "Test3",
     icon: <Shirt className="w-4 h-4" />,
-    slug: "t-shirts",
+    slug: "test3",
   },
   {
     name: "Shoes",

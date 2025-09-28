@@ -1,10 +1,9 @@
-import { auth } from "@clerk/nextjs/server";
 
-const TestPage = async () => {
-  const { getToken } = await auth();
-  const token = await getToken();
+import { getServerSession } from "next-auth/next";
 
-  console.log(token)
+async function TestPage() {
+  const session = await getServerSession();
+  console.log({ session })
 
   // const resProduct = await fetch("http://localhost:8000/test", {
   //   headers: {
@@ -29,7 +28,7 @@ const TestPage = async () => {
   // });
   // const dataPayment = await resPayment.json();
 
-  return <div className="">TestPage</div>;
+  return <div className="">TestPage NextAuth</div>;
 };
 
 export default TestPage;

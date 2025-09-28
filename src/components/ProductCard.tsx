@@ -1,12 +1,31 @@
 "use client";
 
 import useCartStore from "@/stores/cartStore";
-import { ProductType } from "@repo/types";
 import { ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "react-toastify";
+
+interface ProductType {
+  _id: string;
+  name: string;
+  shortDescription: string;
+  description: string;
+  price: number;
+  stock: {
+    blue: number;
+    green: number;
+  };
+  category: string;
+  sizes: string[];
+  colors: string[];
+  images: {
+    [key: string]: string;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 const ProductCard = ({ product }: { product: ProductType }) => {
   const [productTypes, setProductTypes] = useState({
@@ -42,16 +61,23 @@ const ProductCard = ({ product }: { product: ProductType }) => {
   return (
     <div className="shadow-lg rounded-lg overflow-hidden">
       {/* IMAGE */}
-      <Link href={`/products/${product.id}`}>
-        <div className="relative aspect-[2/3]">
+      <Link href={product._id ? `/products/${product._id}` : "/products"}>
+        
+          
+            
+          
+            
+          
+        
+      </Link>
+      <div className="relative aspect-[2/3]">
           <Image
-            src={(product.images as Record<string,string>)?.[productTypes.color] || ""}
+            src={(product.images && (product.images as Record<string,string>)?.[productTypes.color]) || ""}
             alt={product.name}
             fill
             className="object-cover hover:scale-105 transition-all duration-300"
           />
         </div>
-      </Link>
       {/* PRODUCT DETAIL */}
       <div className="flex flex-col gap-4 p-4">
         <h1 className="font-medium">{product.name}</h1>
@@ -69,7 +95,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
                 handleProductType({ type: "size", value: e.target.value })
               }
             >
-              {product.sizes.map((size) => (
+              {product.sizes.map((size: string) => (
                 <option key={size} value={size}>
                   {size.toUpperCase()}
                 </option>
@@ -80,7 +106,7 @@ const ProductCard = ({ product }: { product: ProductType }) => {
           <div className="flex flex-col gap-1">
             <span className="text-gray-500">Color</span>
             <div className="flex items-center gap-2">
-              {product.colors.map((color) => (
+              {product.colors.map((color: string) => (
                 <div
                   className={`cursor-pointer border-1 ${
                     productTypes.color === color

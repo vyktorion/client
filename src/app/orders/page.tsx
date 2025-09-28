@@ -1,16 +1,18 @@
-import { auth } from "@clerk/nextjs/server";
 import { OrderType } from "@repo/types";
 
 const fetchOrders = async () => {
-  const { getToken } = await auth();
-  const token = await getToken();
+  // NextAuth implementation here
+  // const session = await getServerSession(authOptions);
+  // if (!session) {
+  //   return null;
+  // }
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_ORDER_SERVICE_URL}/user-orders`,
     {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      // headers: {
+      //   Authorization: `Bearer ${token}`,
+      // },
     }
   );
 
